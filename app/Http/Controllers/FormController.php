@@ -26,7 +26,7 @@ class FormController extends Controller
             'nrp' => 'required|numeric',
             'jurusan' => 'required',
             'usia' => 'required|numeric',
-            'hobby' => 'required',
+            'berat' => 'required|numeric|between:2.50,99.99',
             'foto' => 'required|image|mimes:jpeg,png,jpg'
         ],$messagesError);
 

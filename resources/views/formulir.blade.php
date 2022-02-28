@@ -62,9 +62,9 @@
                                                @enderror
                                          </div>
                                          <div class="form-group">
-                                            <label for="hobby">Hobby</label>
-                                            <input class="form-control" type="text" name="hobby" value="{{ old('hobby') }}" class="@error('hobby') is-invalid @enderror">
-                                            @error('hobby')
+                                            <label for="berat">Berat Badan (kg)</label>
+                                            <input class="form-control" type="text" name="berat" value="{{ old('berat') }}" class="@error('berat') is-invalid @enderror">
+                                            @error('berat')
                                                        <div class="alert alert-danger">{{ $message }}</div>
                                             @enderror
                                         </div>
