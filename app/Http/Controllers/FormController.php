@@ -1,0 +1,35 @@
+<?php
+ 
+namespace App\Http\Controllers;
+ 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+ 
+class FormController extends Controller
+{
+    public function formulir()
+    {
+        return view('formulir');
+    }
+ 
+    public function proses(Request $request)
+    {
+        $messagesError = [
+            'required' => ':attribute ini wajib diisi!!',
+            'min' => ':attribute harus diisi minimal :min karakter!!!',
+            'max' => ':attribute harus diisi maksimal :max karakter!!!',
+            'numeric' => ':attribute harus berisi angka'
+        ];
+        
+        $this->validate($request,[
+            'nama' => 'required|min:5|max:20',
+            'nrp' => 'required|numeric',
+            'jurusan' => 'required',
+            'usia' => 'required|numeric',
+            'hobby' => 'required',
+            'foto' => 'required|image|mimes:jpeg,png,jpg'
+        ],$messagesError);
+
+        return view('proses',['data' => $request]);
+    }
+}
