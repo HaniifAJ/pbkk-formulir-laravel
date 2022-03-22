@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
  
 class FormController extends Controller
 {
-    public function formulir()
+    public function input()
     {
-        return view('formulir');
+        return view('input');
     }
  
     public function proses(Request $request)
@@ -18,18 +18,13 @@ class FormController extends Controller
             'required' => ':attribute ini wajib diisi!!',
             'min' => ':attribute harus diisi minimal :min karakter!!!',
             'max' => ':attribute harus diisi maksimal :max karakter!!!',
-            'numeric' => ':attribute harus berisi angka'
         ];
         
         $this->validate($request,[
             'nama' => 'required|min:5|max:20',
-            'nrp' => 'required|numeric',
-            'jurusan' => 'required',
-            'usia' => 'required|numeric',
-            'berat' => 'required|numeric|between:2.50,99.99',
-            'foto' => 'required|image|mimes:jpeg,png,jpg'
+            'pekerjaan' => 'required',
+            'usia' => 'required|numeric'
         ],$messagesError);
-
-        return view('proses',['data' => $request]);
+        
     }
 }

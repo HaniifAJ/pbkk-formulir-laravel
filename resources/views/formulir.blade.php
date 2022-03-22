@@ -1,101 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Formulir</title>
- 
-    <!-- bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>Guest's Form</title>
 </head>
+
 <body>
- 
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="card mt-5">
-                        <div class="card-body">
-                            <h3 class="text-center">Formulir</h3>
-                            <br/>
-
-                            @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card mt-5">
+                    <h3 class="card-title text-center mt-5">
+                        Guest's Form
+                    </h3>
+                    <div class="card-body">
+                        <!-- menambahkan query string warna dengan value biru -->
+                        <form method="POST" action="{{route('proses-form-guest',['id' => '99','warna' => 'biru'])}}" enctype="multipart/form-data">
+                            @csrf
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control" id="name" name="name">
                             </div>
-                            @endif
- 
-                            <br/>
-                             <!-- form validasi -->
-                             <form action="/proses" method="post" enctype="multipart/form-data">
-                                {{ csrf_field() }}
-                                    <div class="form-group">
-                                            <label for="nama">Nama</label>
-                                            <input class="form-control" type="text" name="nama" value="{{ old('nama') }}" class="@error('nama') is-invalid @enderror">
-                                            @error('nama')
-                                                       <div class="alert alert-danger">{{ $message }}</div>
-                                               @enderror
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="nrp">NRP</label>
-                                            <input class="form-control" type="text" name="nrp" value="{{ old('nrp') }}" class="@error('nrp') is-invalid @enderror">
-                                            @error('nrp')
-                                                       <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group">
-                                               <label for="jurusan">Jurusan</label>
-                                               <input class="form-control" type="text" name="jurusan" value="{{ old('jurusan') }}" class="@error('jurusan') is-invalid @enderror">
-                                                @error('jurusan')
-                                                         <div class="alert alert-danger">{{ $message }}</div>
-                                                @enderror
-                                        </div>
-                                        <div class="form-group">
-                                               <label for="usia">Usia</label>
-                                               <input class="form-control" type="text" name="usia" value="{{ old('usia') }}" class="@error('usia') is-invalid @enderror">
-                                               @error('usia')
-                                                          <div class="alert alert-danger">{{ $message }}</div>
-                                               @enderror
-                                         </div>
-                                         <div class="form-group">
-                                            <label for="berat">Berat Badan (kg)</label>
-                                            <input class="form-control" type="text" name="berat" value="{{ old('berat') }}" class="@error('berat') is-invalid @enderror">
-                                            @error('berat')
-                                                       <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label" >Foto</label>
-                                            <input class="form-control" type="file" id="formFile" name="foto" accept="image/*" onchange="loadFile(event)" class="@error('foto') is-invalid @enderror">
-                                            @error('foto')
-                                                       <div class="alert alert-danger">{{ $message }}</div>
-                                            @enderror
-                                            <img id="output"/>
-                                            <script>
-                                              var loadFile = function(event) {
-                                                var output = document.getElementById('output');
-                                                output.src = URL.createObjectURL(event.target.files[0]);
-                                                output.onload = function() {
-                                                  URL.revokeObjectURL(output.src) // free memory
-                                                }
-                                              };
-                                            </script>
-                                        </div>
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city" name="city">
+                            </div>
 
-                                        <div class="form-group">
-                                               <input class="btn btn-primary" type="submit" value="Proses">
-                                         </div>
-                                </form>
- 
-                        </div>
+                            <!-- Input dalam bentuk array dengan checkbox -->
+                            <div class="form-group">
+                                <label for="name">Hobby</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Bermain" id="Bermain" name="hobby[]">
+                                    <label class="form-check-label" for="Bermain">
+                                        Bermain
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Membaca" id="Membaca" name="hobby[]">
+                                    <label class="form-check-label" for="Membaca">
+                                        Membaca
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Tidur" id="Tidur" name="hobby[]">
+                                    <label class="form-check-label" for="Tidur">
+                                        Tidur
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="gambar">Gambar</label>
+                                <input type="file" class="form-control-file" id="gambar" name="gambar">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-   
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
 </body>
+
 </html>
